@@ -76,6 +76,14 @@ class Game extends React.Component {
     });
   }
 
+  faire_bold(move) {
+    let list = document.getElementsByTagName('li');
+    for (let j=0; j<list.length; ++j) {
+      list[j].getElementsByTagName('button')[0].className='';
+    }
+    list[move].getElementsByTagName('button')[0].className = "bold";
+  }
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
@@ -89,13 +97,13 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      console.log(step);
+      // console.log(current);
       const desc = move ?
         'Go to move #' + step.location :
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button onClick={() => {this.jumpTo(move); this.faire_bold(move);}}>{desc}</button>
         </li>
       );
     });
