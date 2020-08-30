@@ -1,45 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Board from './Board'
+import './Game.css'
 
-function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
-
-class Board extends React.Component {
-  renderSquare(i) {
-    return (
-      <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
+export const WIDTH = 3
+export const HEIGHT = 3
+export const SIZE = WIDTH * HEIGHT
 
 class Game extends React.Component {
   constructor(props) {
@@ -47,7 +12,7 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null),
+          squares: Array(SIZE).fill(null),
           location: [],
         }
       ],
@@ -68,7 +33,7 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
-          location: [Math.floor(i/3), i%3],
+          location: [ Math.floor( i / WIDTH ), i % WIDTH ],
         }
       ]),
       stepNumber: history.length,
@@ -116,16 +81,19 @@ class Game extends React.Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={i => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+      <div className="content">
+        <div className="title">Tic-Tac-Toe</div>
+        <div className="game">
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={i => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <div className="status">{status}</div>
+            <ol>{moves}</ol>
+          </div>
         </div>
       </div>
     );

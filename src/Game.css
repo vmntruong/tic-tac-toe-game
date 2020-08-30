@@ -1,0 +1,25 @@
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 400px;
+}
+
+.title {
+    font-size: 37px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.game {
+    display: flex;
+    flex-direction: row;
+}
+
+.game-info {
+    margin-left: 20px;
+}
+
+.status {
+    margin-bottom: 10px;
+}
